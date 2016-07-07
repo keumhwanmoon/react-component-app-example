@@ -1,32 +1,5 @@
 import React, { Component, PropTypes } from 'react';
 import { render } from 'react-dom';
-import 'whatwg-fetch';
-
-class ContactsAppContainer extends Component {
-    constructor() {
-        super();
-        this.state = {
-            contacts: []
-        }
-    }
-
-    componentDidMount() {
-        fetch('./contacts.json')
-            .then((response) => response.json())
-            .then((responseData) => {
-                this.setState({contacts: responseData});
-            })
-            .catch((error) => {
-                console.log('Error fetching and parsing data', error);
-            });
-    }
-
-    render() {
-        return (
-            <ContactsApp contacts={this.state.contacts} />
-        )
-    }
-}
 
 class ContactsApp extends Component {
     constructor() {
@@ -60,7 +33,7 @@ class SearchBar extends Component {
     }
     render() {
         return <input type="search" placeholder="search" value={this.props.filterText}
-                      onChange={this.handleChange.bind(this)} />
+                onChange={this.handleChange.bind(this)} />
     }
 }
 
@@ -100,4 +73,17 @@ ContactItem.propTypes = {
     email: PropTypes.string.isRequired
 };
 
-render(<ContactsAppContainer />, document.getElementById('root'));
+let contacts = [
+    { name: "Contacts1", email: "contacts1@contacts.com"},
+    { name: "Contacts2", email: "contacts2@contacts.com"},
+    { name: "Contacts3", email: "contacts3@contacts.com"},
+    { name: "Contacts4", email: "contacts4@contacts.com"},
+    { name: "Contacts5", email: "contacts5@contacts.com"},
+    { name: "Contacts6", email: "contacts6@contacts.com"},
+    { name: "Contacts7", email: "contacts7@contacts.com"},
+    { name: "Contacts8", email: "contacts8@contacts.com"},
+    { name: "Contacts9", email: "contacts9@contacts.com"},
+    { name: "Contacts10", email: "contacts10@contacts.com"}
+];
+
+render(<ContactsApp contacts={contacts} />, document.getElementById('root'));
